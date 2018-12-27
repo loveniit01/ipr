@@ -1,5 +1,5 @@
 package com.ipr.entity.other;
-// Generated 26 Dec, 2018 5:16:16 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated 27 Dec, 2018 5:15:44 PM by Hibernate Tools 5.1.0.Alpha1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -40,8 +40,6 @@ public class UploadDataAction implements java.io.Serializable {
 			@AttributeOverride(name = "qc2", column = @Column(name = "qc2", nullable = false)),
 			@AttributeOverride(name = "qc2User", column = @Column(name = "qc2_user")),
 			@AttributeOverride(name = "qc2Time", column = @Column(name = "qc2_time", length = 19)),
-			@AttributeOverride(name = "isWhiteList", column = @Column(name = "is_whiteList", nullable = false)),
-			@AttributeOverride(name = "isGreyList", column = @Column(name = "is_greyList", nullable = false)),
 			@AttributeOverride(name = "dataNotify", column = @Column(name = "data_Notify", nullable = false)),
 			@AttributeOverride(name = "dataNotifyUser", column = @Column(name = "data_notify_user", nullable = false)),
 			@AttributeOverride(name = "fourceNotify", column = @Column(name = "fource_notify", nullable = false)) })

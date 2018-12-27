@@ -1,5 +1,5 @@
 package com.ipr.entity.other;
-// Generated 26 Dec, 2018 5:16:16 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated 27 Dec, 2018 5:15:44 PM by Hibernate Tools 5.1.0.Alpha1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -23,8 +23,6 @@ public class UploadDataActionId implements java.io.Serializable {
 	private byte qc2;
 	private Integer qc2User;
 	private Date qc2Time;
-	private byte isWhiteList;
-	private byte isGreyList;
 	private byte dataNotify;
 	private int dataNotifyUser;
 	private byte fourceNotify;
@@ -32,15 +30,13 @@ public class UploadDataActionId implements java.io.Serializable {
 	public UploadDataActionId() {
 	}
 
-	public UploadDataActionId(byte directNotice, byte invalid, long invalidBy, byte qc1, byte qc2, byte isWhiteList,
-			byte isGreyList, byte dataNotify, int dataNotifyUser, byte fourceNotify) {
+	public UploadDataActionId(byte directNotice, byte invalid, long invalidBy, byte qc1, byte qc2, byte dataNotify,
+			int dataNotifyUser, byte fourceNotify) {
 		this.directNotice = directNotice;
 		this.invalid = invalid;
 		this.invalidBy = invalidBy;
 		this.qc1 = qc1;
 		this.qc2 = qc2;
-		this.isWhiteList = isWhiteList;
-		this.isGreyList = isGreyList;
 		this.dataNotify = dataNotify;
 		this.dataNotifyUser = dataNotifyUser;
 		this.fourceNotify = fourceNotify;
@@ -48,7 +44,7 @@ public class UploadDataActionId implements java.io.Serializable {
 
 	public UploadDataActionId(Long uploadDataId, byte directNotice, byte invalid, long invalidBy, Date invalidDate,
 			String invalidReason, byte qc1, Integer qc1User, Date qc1Time, byte qc2, Integer qc2User, Date qc2Time,
-			byte isWhiteList, byte isGreyList, byte dataNotify, int dataNotifyUser, byte fourceNotify) {
+			byte dataNotify, int dataNotifyUser, byte fourceNotify) {
 		this.uploadDataId = uploadDataId;
 		this.directNotice = directNotice;
 		this.invalid = invalid;
@@ -61,8 +57,6 @@ public class UploadDataActionId implements java.io.Serializable {
 		this.qc2 = qc2;
 		this.qc2User = qc2User;
 		this.qc2Time = qc2Time;
-		this.isWhiteList = isWhiteList;
-		this.isGreyList = isGreyList;
 		this.dataNotify = dataNotify;
 		this.dataNotifyUser = dataNotifyUser;
 		this.fourceNotify = fourceNotify;
@@ -176,24 +170,6 @@ public class UploadDataActionId implements java.io.Serializable {
 		this.qc2Time = qc2Time;
 	}
 
-	@Column(name = "is_whiteList", nullable = false)
-	public byte getIsWhiteList() {
-		return this.isWhiteList;
-	}
-
-	public void setIsWhiteList(byte isWhiteList) {
-		this.isWhiteList = isWhiteList;
-	}
-
-	@Column(name = "is_greyList", nullable = false)
-	public byte getIsGreyList() {
-		return this.isGreyList;
-	}
-
-	public void setIsGreyList(byte isGreyList) {
-		this.isGreyList = isGreyList;
-	}
-
 	@Column(name = "data_Notify", nullable = false)
 	public byte getDataNotify() {
 		return this.dataNotify;
@@ -250,8 +226,6 @@ public class UploadDataActionId implements java.io.Serializable {
 						&& castOther.getQc2User() != null && this.getQc2User().equals(castOther.getQc2User())))
 				&& ((this.getQc2Time() == castOther.getQc2Time()) || (this.getQc2Time() != null
 						&& castOther.getQc2Time() != null && this.getQc2Time().equals(castOther.getQc2Time())))
-				&& (this.getIsWhiteList() == castOther.getIsWhiteList())
-				&& (this.getIsGreyList() == castOther.getIsGreyList())
 				&& (this.getDataNotify() == castOther.getDataNotify())
 				&& (this.getDataNotifyUser() == castOther.getDataNotifyUser())
 				&& (this.getFourceNotify() == castOther.getFourceNotify());
@@ -272,8 +246,6 @@ public class UploadDataActionId implements java.io.Serializable {
 		result = 37 * result + this.getQc2();
 		result = 37 * result + (getQc2User() == null ? 0 : this.getQc2User().hashCode());
 		result = 37 * result + (getQc2Time() == null ? 0 : this.getQc2Time().hashCode());
-		result = 37 * result + this.getIsWhiteList();
-		result = 37 * result + this.getIsGreyList();
 		result = 37 * result + this.getDataNotify();
 		result = 37 * result + this.getDataNotifyUser();
 		result = 37 * result + this.getFourceNotify();

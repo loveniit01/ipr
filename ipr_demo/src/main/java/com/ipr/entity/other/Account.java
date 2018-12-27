@@ -1,10 +1,12 @@
 package com.ipr.entity.other;
-// Generated 26 Dec, 2018 5:16:16 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated 27 Dec, 2018 5:15:44 PM by Hibernate Tools 5.1.0.Alpha1
 
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,7 +25,7 @@ import com.ipr.entity.AppUser;
 		@UniqueConstraint(columnNames = "website") })
 public class Account implements java.io.Serializable {
 
-	private long id;
+	private Long id;
 	private AppUser appUser;
 	private String accountName;
 	private String mailId;
@@ -35,14 +37,12 @@ public class Account implements java.io.Serializable {
 	public Account() {
 	}
 
-	public Account(long id, AppUser appUser) {
-		this.id = id;
+	public Account(AppUser appUser) {
 		this.appUser = appUser;
 	}
 
-	public Account(long id, AppUser appUser, String accountName, String mailId, Long contact, String address,
-			String website, Date createdDate) {
-		this.id = id;
+	public Account(AppUser appUser, String accountName, String mailId, Long contact, String address, String website,
+			Date createdDate) {
 		this.appUser = appUser;
 		this.accountName = accountName;
 		this.mailId = mailId;
@@ -53,13 +53,14 @@ public class Account implements java.io.Serializable {
 	}
 
 	@Id
+	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "id", unique = true, nullable = false)
-	public long getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
