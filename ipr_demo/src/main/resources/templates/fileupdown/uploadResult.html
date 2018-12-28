@@ -14,8 +14,18 @@
        
       <ul th:each="file : ${uploadedFiles}">
          <li th:utext="${file}"></li>  
-      </ul>      
-       
+      </ul>   
+      <hr>  
+    <!--   <table>
+      <tr>
+      <th>Link</th><th>Error</th>
+      </tr>
+       <tr th:each="instance : ${errorDetails}">
+    <td th:text="${instance.key}">keyvalue</td>
+    <td th:text="${instance.value.numOfData}">num</td>
+</tr>
+      </table>  -->
+      
       <h3>Failed:</h3>
       <ul th:each="file : ${failedFiles}">
          <li style="color:red;" th:utext="${file}"></li>  

@@ -1,5 +1,5 @@
 package com.ipr.entity.other;
-// Generated 26 Dec, 2018 5:16:16 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated 28 Dec, 2018 2:44:56 PM by Hibernate Tools 5.1.0.Alpha1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -26,19 +26,19 @@ public class UserPerformanceDetectView implements java.io.Serializable {
 
 	@EmbeddedId
 
-	@AttributeOverrides({ @AttributeOverride(name = "userIdId", column = @Column(name = "USER_ID_ID")),
-			@AttributeOverride(name = "userFirstName", column = @Column(name = "user_first_name", length = 50)),
-			@AttributeOverride(name = "userLastName", column = @Column(name = "user_last_name", length = 50)),
-			@AttributeOverride(name = "workDate", column = @Column(name = "work_date", length = 10)),
-			@AttributeOverride(name = "infringingCount", column = @Column(name = "infringing_count", nullable = false)),
-			@AttributeOverride(name = "sourceCount", column = @Column(name = "source_count", nullable = false)),
-			@AttributeOverride(name = "ytCount", column = @Column(name = "yt_count", nullable = false)),
-			@AttributeOverride(name = "fbCount", column = @Column(name = "fb_count", nullable = false)),
-			@AttributeOverride(name = "instaCount", column = @Column(name = "insta_count", nullable = false)),
-			@AttributeOverride(name = "twitterCount", column = @Column(name = "twitter_count", nullable = false)),
-			@AttributeOverride(name = "wlCount", column = @Column(name = "wl_count", nullable = false)),
+	@AttributeOverrides({ @AttributeOverride(name = "fbCount", column = @Column(name = "fb_count", nullable = false)),
 			@AttributeOverride(name = "glCount", column = @Column(name = "gl_count", nullable = false)),
-			@AttributeOverride(name = "invalidCount", column = @Column(name = "invalid_count", nullable = false)) })
+			@AttributeOverride(name = "infringingCount", column = @Column(name = "infringing_count", nullable = false)),
+			@AttributeOverride(name = "instaCount", column = @Column(name = "insta_count", nullable = false)),
+			@AttributeOverride(name = "invalidCount", column = @Column(name = "invalid_count", nullable = false)),
+			@AttributeOverride(name = "sourceCount", column = @Column(name = "source_count", nullable = false)),
+			@AttributeOverride(name = "twitterCount", column = @Column(name = "twitter_count", nullable = false)),
+			@AttributeOverride(name = "userFirstName", column = @Column(name = "user_first_name", nullable = false, length = 50)),
+			@AttributeOverride(name = "userIdId", column = @Column(name = "user_id_id", nullable = false)),
+			@AttributeOverride(name = "userLastName", column = @Column(name = "user_last_name", nullable = false, length = 50)),
+			@AttributeOverride(name = "wlCount", column = @Column(name = "wl_count", nullable = false)),
+			@AttributeOverride(name = "workDate", column = @Column(name = "work_date", nullable = false, length = 19)),
+			@AttributeOverride(name = "ytCount", column = @Column(name = "yt_count", nullable = false)) })
 	public UserPerformanceDetectViewId getId() {
 		return this.id;
 	}

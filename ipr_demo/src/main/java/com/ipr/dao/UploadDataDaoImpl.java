@@ -88,6 +88,12 @@ public class UploadDataDaoImpl implements UploadDataDao {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void saveUploadData(UploadData uploadData) {
+		// TODO Auto-generated method stub
+		entityManager.persist(uploadData);
+	}
 	
 	
 

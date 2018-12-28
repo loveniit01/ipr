@@ -3,6 +3,7 @@
  */
 package com.ipr.dao;
 
+
 import org.springframework.data.repository.CrudRepository;
 
 import com.ipr.entity.other.UploadData;
@@ -14,5 +15,5 @@ import com.ipr.entity.other.UploadData;
  */
 public interface UploadDataDao extends CrudRepository<UploadData, Long> {
 	
-
+public void saveUploadData(UploadData uploadData) ;
 }

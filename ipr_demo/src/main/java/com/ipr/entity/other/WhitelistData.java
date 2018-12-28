@@ -1,5 +1,5 @@
 package com.ipr.entity.other;
-// Generated 27 Dec, 2018 5:15:44 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated 28 Dec, 2018 2:44:56 PM by Hibernate Tools 5.1.0.Alpha1
 
 import java.util.Date;
 import javax.persistence.Column;

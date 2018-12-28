@@ -1,9 +1,11 @@
 package com.ipr.entity.other;
-// Generated 27 Dec, 2018 5:15:44 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated 28 Dec, 2018 2:44:56 PM by Hibernate Tools 5.1.0.Alpha1
 
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -32,14 +34,14 @@ public class UploadData implements java.io.Serializable {
 	private Integer userId;
 	private Integer projectType;
 	private byte isWhitelist;
-	private byte isGreyList;
+	private byte isGreylist;
 	private int isDeleted;
 
 	public UploadData() {
 	}
 
 	public UploadData(long id, String link, long projectId, String domainName, String sourceLink, Date uploadTime,
-			byte linkType, byte isManual, byte isWhitelist, byte isGreyList, int isDeleted) {
+			byte linkType, byte isManual, byte isWhitelist, byte isGreylist, int isDeleted) {
 		this.id = id;
 		this.link = link;
 		this.projectId = projectId;
@@ -49,13 +51,13 @@ public class UploadData implements java.io.Serializable {
 		this.linkType = linkType;
 		this.isManual = isManual;
 		this.isWhitelist = isWhitelist;
-		this.isGreyList = isGreyList;
+		this.isGreylist = isGreylist;
 		this.isDeleted = isDeleted;
 	}
 
 	public UploadData(long id, String link, long projectId, String domainName, String sourceLink, String note1,
 			String note2, String note3, Date uploadTime, byte linkType, byte isManual, Integer userId,
-			Integer projectType, byte isWhitelist, byte isGreyList, int isDeleted) {
+			Integer projectType, byte isWhitelist, byte isGreylist, int isDeleted) {
 		this.id = id;
 		this.link = link;
 		this.projectId = projectId;
@@ -70,12 +72,12 @@ public class UploadData implements java.io.Serializable {
 		this.userId = userId;
 		this.projectType = projectType;
 		this.isWhitelist = isWhitelist;
-		this.isGreyList = isGreyList;
+		this.isGreylist = isGreylist;
 		this.isDeleted = isDeleted;
 	}
 
 	@Id
-
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "id", unique = true, nullable = false)
 	public long getId() {
 		return this.id;
@@ -149,7 +151,7 @@ public class UploadData implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "upload_time", nullable = false, length = 19)
+	@Column(name = "upload_time", length = 19, nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	public Date getUploadTime() {
 		return this.uploadTime;
 	}
@@ -203,13 +205,13 @@ public class UploadData implements java.io.Serializable {
 		this.isWhitelist = isWhitelist;
 	}
 
-	@Column(name = "is_greyList", nullable = false)
-	public byte getIsGreyList() {
-		return this.isGreyList;
+	@Column(name = "is_greylist", nullable = false)
+	public byte getIsGreylist() {
+		return this.isGreylist;
 	}
 
-	public void setIsGreyList(byte isGreyList) {
-		this.isGreyList = isGreyList;
+	public void setIsGreylist(byte isGreylist) {
+		this.isGreylist = isGreylist;
 	}
 
 	@Column(name = "is_deleted", nullable = false)
