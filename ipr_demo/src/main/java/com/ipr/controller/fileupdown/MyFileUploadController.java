@@ -8,7 +8,9 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,8 +27,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ipr.dao.GreylistDataDaoImpl;
+import com.ipr.dao.UploadDataDaoImpl;
 import com.ipr.dao.WhitelistDataDaoImpl;
 import com.ipr.entity.AppUser;
+import com.ipr.entity.other.UploadData;
 import com.ipr.form.MyUploadForm;
 
 @Controller
@@ -47,6 +51,9 @@ public class MyFileUploadController {
 
 	@Autowired
 	GreylistDataDaoImpl greyIMPL;
+
+	@Autowired
+	UploadDataDaoImpl uploadIMPL;
 
 	// GET: Show upload form page.
 	@RequestMapping(value = "/uploadOneFile", method = RequestMethod.GET)
@@ -99,6 +106,8 @@ public class MyFileUploadController {
 			MyUploadForm myUploadForm) {
 
 		// get user id
+		HttpSession session = request.getSession();
+//		   System.out.println( session.getAttribute("userid"));
 
 		String description = myUploadForm.getDescription();
 		logger.info("Description: " + description);
@@ -114,16 +123,16 @@ public class MyFileUploadController {
 		//
 		List<File> uploadedFiles = new ArrayList<File>();
 		List<String> failedFiles = new ArrayList<String>();
-//		List<String> error = new ArrayList<String>();
+		Map<String, String> errorDetails = new HashMap<>();
 
 		/**
-		 * ======== white List date==================
+		 * ======== white List data==================
 		 */
 
 		List<String> whiteListDomains = whiteIMPL.allDomain();
 
 		/**
-		 * ======== grey list date================
+		 * ======== grey list data================
 		 */
 		List<String> greyListDomains = greyIMPL.allDomain();
 
@@ -166,12 +175,47 @@ public class MyFileUploadController {
 								gy = compairGreyList(country[1], greyListDomains);
 							}
 
-							for (String pp : country) {
-								System.out.print(pp + " | ");
-							}
-							System.out.println();
+							/**
+							 * country[0]= link; country[1]= domain; country[2]= project_id; country[3]=
+							 * source_link; country[5]= note1; country[6]= note2; country[0]= note3;
+							 */
+
+							/*
+							 * if (country[0].startsWith("http://") || country[0].startsWith("http://")) {
+							 * 
+							 * 
+							 * } else { errorDetails.put(country[0], "http:// or https:// missing"); }
+							 */
 
 							// data upload code will be call from here
+							UploadData uploadData = new UploadData();
+//							for (String pp : country) {
+							try {
+								uploadData.setLink(country[0].trim());
+								uploadData.setDomainName(country[1].trim());
+								uploadData.setProjectId(Long.parseLong(country[2].trim()));
+								uploadData.setSourceLink(country[3].trim());
+								if (country[3].trim().length() < 1) {
+									uploadData.setLinkType((byte) 0);
+								} else {
+									uploadData.setLinkType((byte) 1);
+								}
+								uploadData.setNote1(country[4].trim());
+								uploadData.setNote2(country[5].trim());
+								uploadData.setNote3(country[6].trim());
+								uploadData.setIsWhitelist((byte) wt);
+								uploadData.setIsGreylist((byte) gy);
+								uploadData
+										.setUserId(Integer.parseInt(session.getAttribute("userid").toString().trim()));
+								uploadIMPL.saveUploadData(uploadData);
+								
+							}
+
+							catch (Exception e) {
+								// TODO: handle exception
+								e.printStackTrace();
+							}
+//							}
 
 						}
 
@@ -192,6 +236,7 @@ public class MyFileUploadController {
 					// ----- end read CSV------
 
 				} catch (Exception e) {
+					e.printStackTrace();
 					logger.info("Error Write file: " + name);
 					failedFiles.add(name);
 				}
@@ -200,7 +245,7 @@ public class MyFileUploadController {
 		model.addAttribute("description", description);
 		model.addAttribute("uploadedFiles", uploadedFiles);
 		model.addAttribute("failedFiles", failedFiles);
-
+		model.addAttribute("errorDetails", errorDetails);
 		model.addAttribute("error", failedFiles);
 
 		return "fileupdown/uploadResult";
