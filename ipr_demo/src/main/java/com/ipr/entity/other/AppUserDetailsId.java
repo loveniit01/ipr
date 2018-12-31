@@ -265,7 +265,7 @@ public class AppUserDetailsId implements java.io.Serializable {
 		this.createdBy = createdBy;
 	}
 
-	@Column(name = "created_date", length = 19)
+	@Column(name = "created_date", length = 19, nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	public Date getCreatedDate() {
 		return this.createdDate;
 	}

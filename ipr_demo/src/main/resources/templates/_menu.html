@@ -27,6 +27,16 @@
 				<ul class="nav navbar-nav">
 					<li class="active"><a th:href="@{/}">Home</a></li>
 					<li><a th:href="@{/admin}">admin</a></li>
+					
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="#">Admin Area<span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/newUser">Add New User</a></li>
+							<li><a href="#">OM QC</a></li>
+						</ul></li>
+					
+					
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#">Data<span class="caret"></span></a>
 						<ul class="dropdown-menu">

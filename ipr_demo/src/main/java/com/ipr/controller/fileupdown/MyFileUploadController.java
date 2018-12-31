@@ -210,6 +210,10 @@ public class MyFileUploadController {
 								uploadIMPL.saveUploadData(uploadData);
 								
 							}
+							catch (NumberFormatException e) {
+								// TODO: handle exception
+								logger.error("project id is wrong...");
+							}
 
 							catch (Exception e) {
 								// TODO: handle exception

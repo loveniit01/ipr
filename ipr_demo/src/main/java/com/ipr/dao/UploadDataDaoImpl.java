@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ipr.entity.other.UploadData;
 
-
 @Repository
 @Transactional
 public class UploadDataDaoImpl implements UploadDataDao {
@@ -18,9 +17,9 @@ public class UploadDataDaoImpl implements UploadDataDao {
 	public UploadDataDaoImpl() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Autowired
-    private EntityManager entityManager;
+	private EntityManager entityManager;
 
 	@Override
 	public <S extends UploadData> S save(S entity) {
@@ -68,33 +67,33 @@ public class UploadDataDaoImpl implements UploadDataDao {
 	@Override
 	public void deleteById(Long id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void delete(UploadData entity) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deleteAll(Iterable<? extends UploadData> entities) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void deleteAll() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void saveUploadData(UploadData uploadData) {
 		// TODO Auto-generated method stub
 		entityManager.persist(uploadData);
+		entityManager.flush();
+//		System.out.println("===idddddddddddd==>>>"+uploadData.getId());
 	}
-	
-	
 
 }

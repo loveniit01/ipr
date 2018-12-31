@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="${title}"></title>
+</head>
+<body>
+	<!-- Include _menu.html -->
+	<th:block th:include="/_menu"></th:block>
+
+	<h2>add new user Page</h2>
+	<!-- <h3>
+		Welcome : <span th:utext="${#request.userPrincipal.name}"></span>
+	</h3> -->
+	<b>This is protected page!</b>
+
+	<br />
+	<br />
+
+	<!-- <div th:if="${userInfo != null}" th:utext="${userInfo}"></div> -->
+
+	<div>
+	<form name='f' th:action="@{/newUser}" method='POST'>
+		
+			<input type="text" id="user_id" name="user_id"> <select
+				name="user_type" id="user_type">
+				<option>Select User Type</option>
+				<option value="3">Manager</option>
+				<option value="4">Team Leader</option>
+				<option value="2">Team Member</option>
+			</select> <input type="submit" value="create new User">
+		</form>
+	</div>
+	<hr>
+	<!-- <div>
+		<ul th:each="users : ${users}">
+			user id:
+			<li th:utext="${user}"></li> password:
+			<li th:utext="${user}"></li>
+		</ul>
+	</div> -->
+
+</body>
+
+</html>

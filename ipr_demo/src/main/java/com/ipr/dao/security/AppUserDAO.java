@@ -30,5 +30,12 @@ public class AppUserDAO {
             return null;
         }
     }
+    
+    public Long saveData(AppUser appUser)
+	{
+		entityManager.persist(appUser);
+		entityManager.flush();
+		return appUser.getUserId();
+	}
  
 }
