@@ -90,9 +90,9 @@ public class WhitelistDataDaoImpl implements WhitelistDataDao {
 	@Override
 	public List<WhitelistData> allData() {
 		// TODO Auto-generated method stub
+		Query query = entityManager.createQuery("select wd from " + WhitelistData.class.getName() + " wd ");
 
-		List<WhitelistData> whitelist = (List<WhitelistData>) entityManager
-				.createQuery("select wd from " + WhitelistData.class.getName() + " wd");
+		List<WhitelistData> whitelist = query.getResultList();
 
 		return whitelist;
 	}
@@ -102,11 +102,11 @@ public class WhitelistDataDaoImpl implements WhitelistDataDao {
 		// TODO Auto-generated method stub
 //		Set<String> whitelistDomain = (Set<String>) entityManager
 //				.createQuery("select wd.domainName from " + WhitelistData.class.getName() + " wd");
-		
-	Query query=	entityManager.createQuery("select wd.domainName from " + WhitelistData.class.getName() + " wd");
-		
-	List<String> whitelistDomain =  query.getResultList();
-	
+
+		Query query = entityManager.createQuery("select wd.domainName from " + WhitelistData.class.getName() + " wd");
+
+		List<String> whitelistDomain = query.getResultList();
+
 		return whitelistDomain;
 
 	}

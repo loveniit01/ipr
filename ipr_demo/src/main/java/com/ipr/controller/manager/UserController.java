@@ -1,4 +1,4 @@
-package com.ipr.controller.fileupdown;
+package com.ipr.controller.manager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class UserController {
 
 	@Autowired
 	AppUserDAO appUserDAO;
-	
+
 	@Autowired
 	UserRoleDao userRoleDao;
 
@@ -41,14 +41,16 @@ public class UserController {
 		// TODO Auto-generated constructor stub
 	}
 
-	@RequestMapping(value = "/newUser", method = RequestMethod.GET)
+	@RequestMapping(value = "/manager/newUser", method = RequestMethod.GET)
 	public String execute(Model model) {
 		List<String> users = new ArrayList<String>();
+		List<AppUser> all_users = appUserDAO.getAlluser();
+		model.addAttribute("all_users", all_users);
 		model.addAttribute("users", users);
 		return "/adminarea/user_new";
 	}
 
-	@RequestMapping(value = "/newUser", method = RequestMethod.POST)
+	@RequestMapping(value = "/manager/newUser", method = RequestMethod.POST)
 	public String createNewUser(HttpServletRequest request, //
 			Model model, @ModelAttribute("userDTL") MixDataForm userDTL) {
 		List<String> users = new ArrayList<String>();
@@ -59,26 +61,32 @@ public class UserController {
 			appUser.setEncrytedPassword(passwordUtils.encrytePassword(userDTL.getUser_id()));
 			appUser.setEnabled(true);
 			appUser.setUserId(appUserDAO.saveData(appUser));
-			//-apply user role
+			// -apply user role
 			AppRole appRole = new AppRole();
 			appRole.setRoleId(userDTL.getUser_type());
 			UserRole userRole = new UserRole();
 			userRole.setAppUser(appUser);
 			userRole.setAppRole(appRole);
-			
+
 			userRoleDao.saveData(userRole);
-			
-			users.add("User_Name : "+userDTL.getUser_id());
-			users.add("Password  : "+userDTL.getUser_id());
-			
-			
+
+			users.add("User_Name : " + userDTL.getUser_id());
+			users.add("Password  : " + userDTL.getUser_id());
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			users.add("error..");
 		}
 
+		List<AppUser> all_users = appUserDAO.getAlluser();
+		model.addAttribute("all_users", all_users);
 		model.addAttribute("users", users);
 		return "/adminarea/user_new";
+	}
+
+	public void getAlluser() {
+		List<AppUser> users = appUserDAO.getAlluser();
+
 	}
 
 }

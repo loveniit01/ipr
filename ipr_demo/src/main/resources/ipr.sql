@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `app_user` (
   `ENABLED` bit(1) NOT NULL,
   PRIMARY KEY (`USER_ID`),
   UNIQUE KEY `APP_USER_UK` (`USER_NAME`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- Dumping data for table ipr_data.app_user: ~4 rows (approximately)
 DELETE FROM `app_user`;
@@ -75,7 +75,9 @@ INSERT INTO `app_user` (`USER_ID`, `USER_NAME`, `ENCRYTED_PASSWORD`, `ENABLED`) 
 	(1, 'admin', '$2a$10$1l9PJTwz.DeQt0YzWRBhYev1.SARsBdJwcJLaDXOeaioVCqAVlXwe', b'1'),
 	(2, 'dbuser', '$2a$10$1l9PJTwz.DeQt0YzWRBhYev1.SARsBdJwcJLaDXOeaioVCqAVlXwe', b'1'),
 	(3, 'dbmanager', '$2a$10$1l9PJTwz.DeQt0YzWRBhYev1.SARsBdJwcJLaDXOeaioVCqAVlXwe', b'1'),
-	(4, 'dbteamlead', '$2a$10$1l9PJTwz.DeQt0YzWRBhYev1.SARsBdJwcJLaDXOeaioVCqAVlXwe', b'1');
+	(4, 'dbteamlead', '$2a$10$1l9PJTwz.DeQt0YzWRBhYev1.SARsBdJwcJLaDXOeaioVCqAVlXwe', b'1'),
+	(6, 'rahul', '$2a$10$TNI6A0BzWeMgmciuTs/oCe6BWZxvLHYVPkAgWVkciU5OIJw7yYE6e', b'1'),
+	(7, 'rahul1', '$2a$10$0ENst6cSdPZbDTPkxUSbWuoUWH0aiZg6lvItZAHH2YGU9zelrt4VS', b'1');
 /*!40000 ALTER TABLE `app_user` ENABLE KEYS */;
 
 -- Dumping structure for table ipr_data.app_user_details
@@ -101,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `app_user_details` (
   `address` varchar(750) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `blood_group` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
   `created_by` bigint(20) NOT NULL DEFAULT '0',
-  `created_date` datetime DEFAULT NULL,
+  `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `disable_date` datetime DEFAULT NULL,
   `disable_by` bigint(20) NOT NULL DEFAULT '0',
   UNIQUE KEY `USER_ID` (`USER_ID_ID`),
@@ -124,34 +126,34 @@ DELETE FROM `app_user_details`;
 -- Dumping structure for view ipr_data.app_user_detail_view
 -- Creating temporary table to overcome VIEW dependency errors
 CREATE TABLE `app_user_detail_view` (
-	`USER_ID_ID` BIGINT(20) NOT NULL,
-	`user_first_name` VARCHAR(50) NULL COLLATE 'utf8mb4_bin',
-	`user_last_name` VARCHAR(50) NULL COLLATE 'utf8mb4_bin',
+	`address` VARCHAR(750) NULL COLLATE 'utf8mb4_bin',
+	`blood_group` VARCHAR(3) NULL COLLATE 'utf8mb4_bin',
+	`created_by` BIGINT(20) NOT NULL,
+	`created_date` DATETIME NOT NULL,
+	`disable_by` BIGINT(20) NOT NULL,
+	`disable_date` DATETIME NULL,
+	`dob_date` TINYINT(4) NULL,
+	`dob_month` TINYINT(4) NULL,
+	`dob_year` SMALLINT(6) NULL COMMENT 'date of birth',
+	`doj_date` TINYINT(4) NULL,
+	`doj_month` TINYINT(4) NULL,
+	`doj_year` SMALLINT(6) NULL COMMENT 'date of joining',
+	`ENABLED` BIT(1) NULL,
+	`ENCRYTED_PASSWORD` VARCHAR(128) NULL COLLATE 'utf8mb4_bin',
+	`father_mobile_no` BIGINT(20) NULL,
+	`father_name` VARCHAR(100) NULL COLLATE 'utf8mb4_bin',
+	`home_phone_no` BIGINT(20) NULL,
+	`id_number` VARCHAR(50) NULL COLLATE 'utf8mb4_bin',
+	`id_type` VARCHAR(50) NULL COLLATE 'utf8mb4_bin',
 	`mail_id_ofc` VARCHAR(50) NULL COLLATE 'utf8mb4_bin',
 	`mail_id_personal` VARCHAR(50) NULL COLLATE 'utf8mb4_bin',
 	`mobile_no` BIGINT(20) NULL,
 	`phone_no` BIGINT(20) NULL,
-	`dob_year` SMALLINT(6) NULL COMMENT 'date of birth',
-	`dob_month` TINYINT(4) NULL,
-	`dob_date` TINYINT(4) NULL,
-	`doj_year` SMALLINT(6) NULL COMMENT 'date of joining',
-	`doj_month` TINYINT(4) NULL,
-	`doj_date` TINYINT(4) NULL,
-	`id_type` VARCHAR(50) NULL COLLATE 'utf8mb4_bin',
-	`id_number` VARCHAR(50) NULL COLLATE 'utf8mb4_bin',
-	`father_name` VARCHAR(100) NULL COLLATE 'utf8mb4_bin',
-	`father_mobile_no` BIGINT(20) NULL,
-	`home_phone_no` BIGINT(20) NULL,
-	`address` VARCHAR(750) NULL COLLATE 'utf8mb4_bin',
-	`blood_group` VARCHAR(3) NULL COLLATE 'utf8mb4_bin',
-	`created_by` BIGINT(20) NOT NULL,
-	`created_date` DATETIME NULL,
-	`disable_date` DATETIME NULL,
-	`disable_by` BIGINT(20) NOT NULL,
+	`user_first_name` VARCHAR(50) NULL COLLATE 'utf8mb4_bin',
 	`USER_ID` BIGINT(20) NULL,
-	`USER_NAME` VARCHAR(36) NULL COLLATE 'utf8mb4_bin',
-	`ENCRYTED_PASSWORD` VARCHAR(128) NULL COLLATE 'utf8mb4_bin',
-	`ENABLED` BIT(1) NULL
+	`USER_ID_ID` BIGINT(20) NOT NULL,
+	`user_last_name` VARCHAR(50) NULL COLLATE 'utf8mb4_bin',
+	`USER_NAME` VARCHAR(36) NULL COLLATE 'utf8mb4_bin'
 ) ENGINE=MyISAM;
 
 -- Dumping structure for table ipr_data.contact
@@ -213,9 +215,9 @@ CREATE TABLE IF NOT EXISTS `hibernate_sequence` (
 DELETE FROM `hibernate_sequence`;
 /*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-	(30),
-	(30),
-	(30);
+	(9),
+	(9),
+	(9);
 /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 
 -- Dumping structure for table ipr_data.persistent_logins
@@ -296,15 +298,15 @@ CREATE TABLE IF NOT EXISTS `upload_data` (
   `is_deleted` int(11) NOT NULL DEFAULT '0' COMMENT 'store datetime in integer format',
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique key` (`link`,`project_id`,`domain_name`,`link_type`,`is_deleted`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table ipr_data.upload_data: ~0 rows (approximately)
+-- Dumping data for table ipr_data.upload_data: ~2 rows (approximately)
 DELETE FROM `upload_data`;
 /*!40000 ALTER TABLE `upload_data` DISABLE KEYS */;
 INSERT INTO `upload_data` (`id`, `link`, `project_id`, `domain_name`, `source_link`, `note1`, `note2`, `note3`, `upload_time`, `link_type`, `is_manual`, `user_id`, `project_type`, `is_whitelist`, `is_greylist`, `is_deleted`) VALUES
-	(17, 'http://www.hello.com/1', 1, 'abpnews.com', 'http://www.hello.com', 'd', 'e', 'f', '2018-12-28 17:20:27', 1, 0, 2, NULL, 0, 1, 0),
-	(18, 'https://www.google.com/1', 1, 'google.com', '', 'd', 'e', 'f', '2018-12-28 17:20:30', 0, 0, 2, NULL, 1, 0, 0),
-	(19, 'https://www.google.com/2', 2, 'google.com', 'https://www.google.com', 'd', 'e', 'f', '2018-12-28 17:20:31', 1, 0, 2, NULL, 1, 0, 0);
+	(3, 'http://www.hello.com/1', 1, 'abpnews.com', 'http://www.hello.com', 'd', 'e', 'f', '2018-12-31 16:14:53', 1, 0, 2, NULL, 0, 1, 0),
+	(4, 'https://www.google.com/1', 1, 'google.com', '', 'd', 'e', 'f', '2018-12-31 16:15:08', 0, 0, 2, NULL, 1, 0, 0),
+	(5, 'https://www.google.com/2', 2, 'google.com', 'https://www.google.com', 'd', 'e', 'f', '2018-12-31 16:15:15', 1, 0, 2, NULL, 1, 0, 0);
 /*!40000 ALTER TABLE `upload_data` ENABLE KEYS */;
 
 -- Dumping structure for table ipr_data.upload_data_action
@@ -328,16 +330,13 @@ CREATE TABLE IF NOT EXISTS `upload_data_action` (
   UNIQUE KEY `UK19mxgqucn8r8prth4lvfnuk7k` (`upload_data_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table ipr_data.upload_data_action: ~0 rows (approximately)
+-- Dumping data for table ipr_data.upload_data_action: ~6 rows (approximately)
 DELETE FROM `upload_data_action`;
 /*!40000 ALTER TABLE `upload_data_action` DISABLE KEYS */;
 INSERT INTO `upload_data_action` (`upload_data_id`, `direct_notice`, `invalid`, `invalid_by`, `invalid_date`, `invalid_reason`, `qc1`, `qc1_user`, `qc1_time`, `qc2`, `qc2_user`, `qc2_time`, `data_Notify`, `data_notify_user`, `fource_notify`) VALUES
-	(14, 0, 0, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, 0, 0),
-	(15, 0, 0, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, 0, 0),
-	(16, 0, 0, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, 0, 0),
-	(17, 0, 0, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, 0, 0),
-	(18, 0, 0, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, 0, 0),
-	(19, 0, 0, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, 0, 0);
+	(3, 0, 0, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, 0, 0),
+	(4, 0, 0, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, 0, 0),
+	(5, 0, 0, 0, NULL, NULL, 0, NULL, NULL, 0, NULL, NULL, 0, 0, 0);
 /*!40000 ALTER TABLE `upload_data_action` ENABLE KEYS */;
 
 -- Dumping structure for table ipr_data.user_performance_detect
@@ -365,29 +364,6 @@ DELETE FROM `user_performance_detect`;
 /*!40000 ALTER TABLE `user_performance_detect` DISABLE KEYS */;
 /*!40000 ALTER TABLE `user_performance_detect` ENABLE KEYS */;
 
--- Dumping structure for table ipr_data.user_performance_detect_view
-CREATE TABLE IF NOT EXISTS `user_performance_detect_view` (
-  `fb_count` int(11) NOT NULL,
-  `gl_count` int(11) NOT NULL,
-  `infringing_count` int(11) NOT NULL,
-  `insta_count` int(11) NOT NULL,
-  `invalid_count` int(11) NOT NULL,
-  `source_count` int(11) NOT NULL,
-  `twitter_count` int(11) NOT NULL,
-  `user_first_name` varchar(50) NOT NULL,
-  `user_id_id` bigint(20) NOT NULL,
-  `user_last_name` varchar(50) NOT NULL,
-  `wl_count` int(11) NOT NULL,
-  `work_date` datetime NOT NULL,
-  `yt_count` int(11) NOT NULL,
-  PRIMARY KEY (`fb_count`,`gl_count`,`infringing_count`,`insta_count`,`invalid_count`,`source_count`,`twitter_count`,`user_first_name`,`user_id_id`,`user_last_name`,`wl_count`,`work_date`,`yt_count`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- Dumping data for table ipr_data.user_performance_detect_view: ~0 rows (approximately)
-DELETE FROM `user_performance_detect_view`;
-/*!40000 ALTER TABLE `user_performance_detect_view` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user_performance_detect_view` ENABLE KEYS */;
-
 -- Dumping structure for table ipr_data.user_performance_notice
 CREATE TABLE IF NOT EXISTS `user_performance_notice` (
   `Column 1` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -411,7 +387,7 @@ CREATE TABLE IF NOT EXISTS `user_role` (
   CONSTRAINT `FK_user_role_app_user` FOREIGN KEY (`USER_ID`) REFERENCES `app_user` (`user_id`),
   CONSTRAINT `FKg7fr1r7o0fkk41nfhnjdyqn7b` FOREIGN KEY (`USER_ID`) REFERENCES `app_user` (`user_id`),
   CONSTRAINT `FKp6m37g6n6c288s096400uw8fw` FOREIGN KEY (`ROLE_ID`) REFERENCES `app_role` (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- Dumping data for table ipr_data.user_role: ~6 rows (approximately)
 DELETE FROM `user_role`;
@@ -422,7 +398,8 @@ INSERT INTO `user_role` (`ID`, `USER_ID`, `ROLE_ID`) VALUES
 	(4, 1, 3),
 	(3, 2, 2),
 	(6, 3, 2),
-	(5, 3, 3);
+	(5, 3, 3),
+	(8, 7, 2);
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 
 -- Dumping structure for table ipr_data.whitelist_data

@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="${title}"></title>
+</head>
+<body>
+	<!-- Include _menu.html -->
+	<th:block th:include="/_menu"></th:block>
+
+	<h2>add new whitelist Page</h2>
+	<!-- <h3>
+		Welcome : <span th:utext="${#request.userPrincipal.name}"></span>
+	</h3> -->
+	<b>This is protected page!</b>
+
+	<br />
+	<br />
+
+	<!-- <div th:if="${userInfo != null}" th:utext="${userInfo}"></div> -->
+
+	<div>
+		<form name='f' th:action="@{/manager/newWhite}" method='POST'>
+
+			<input type="text" id="user_id" name="user_id"> 
+			<input type="submit" value="Add new WhiteList">
+		</form>
+	</div>
+
+	<hr>
+	<table>
+		<tr>
+			<th>WhiteList Domain</th>
+			<th>Created by</th>
+			<th>Created Date</th>
+			<th></th>
+
+		</tr>
+		<tr th:each="all_white : ${all_white}">
+			<td th:utext="${all_users.userId}"></td>
+			<td th:utext="${all_users.userName}"></td>
+
+				<td th:text="${all_users.enabled} ? 'Active' : 'Disable'"></td>
+
+
+
+		</tr>
+
+	</table>
+
+</body>
+
+</html>

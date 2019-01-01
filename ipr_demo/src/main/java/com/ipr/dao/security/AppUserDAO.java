@@ -1,5 +1,7 @@
 package com.ipr.dao.security;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -38,4 +40,11 @@ public class AppUserDAO {
 		return appUser.getUserId();
 	}
  
+    public List<AppUser> getAlluser()
+    {
+    	String sql = "Select e from " + AppUser.class.getName() + " e order by e.userId desc"  ;
+    	Query query = entityManager.createQuery(sql, AppUser.class);
+    	return  query.getResultList();
+    }
+    
 }

@@ -19,8 +19,8 @@
 	<!-- <div th:if="${userInfo != null}" th:utext="${userInfo}"></div> -->
 
 	<div>
-	<form name='f' th:action="@{/newUser}" method='POST'>
-		
+		<form name='f' th:action="@{/manager/newUser}" method='POST'>
+
 			<input type="text" id="user_id" name="user_id"> <select
 				name="user_type" id="user_type">
 				<option>Select User Type</option>
@@ -31,13 +31,34 @@
 		</form>
 	</div>
 	<hr>
-	<!-- <div>
+	<div>
 		<ul th:each="users : ${users}">
 			user id:
 			<li th:utext="${user}"></li> password:
 			<li th:utext="${user}"></li>
 		</ul>
-	</div> -->
+	</div>
+
+	<hr>
+	<table>
+		<tr>
+			<th>user's Index ID</th>
+			<th>User Name</th>
+			<th>User Status</th>
+			<th></th>
+
+		</tr>
+		<tr th:each="all_users : ${all_users}">
+			<td th:utext="${all_users.userId}"></td>
+			<td th:utext="${all_users.userName}"></td>
+
+				<td th:text="${all_users.enabled} ? 'Active' : 'Disable'"></td>
+
+
+
+		</tr>
+
+	</table>
 
 </body>
 
