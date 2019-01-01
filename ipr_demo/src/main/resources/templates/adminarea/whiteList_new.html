@@ -36,10 +36,10 @@
 
 		</tr>
 		<tr th:each="all_white : ${all_white}">
-			<td th:utext="${all_users.userId}"></td>
-			<td th:utext="${all_users.userName}"></td>
-
-				<td th:text="${all_users.enabled} ? 'Active' : 'Disable'"></td>
+			<td th:utext="${all_white.domainName}"></td>
+			<!-- <td th:utext="${all_white.appUser.id}"></td> -->
+<td th:utext="${all_white.createdDate}"></td>
+				<!-- <td th:text="${all_users.enabled} ? 'Active' : 'Disable'"></td> -->
 
 
 
