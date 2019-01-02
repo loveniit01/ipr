@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="${title}"></title>
+</head>
+<body>
+	<!-- Include _menu.html -->
+	<th:block th:include="/_menu"></th:block>
+
+	<h2>add new GreyList Page</h2>
+	<!-- <h3>
+		Welcome : <span th:utext="${#request.userPrincipal.name}"></span>
+	</h3> -->
+	<b>This is protected page!</b>
+
+	<br />
+	<br />
+
+	<!-- <div th:if="${userInfo != null}" th:utext="${userInfo}"></div> -->
+
+	<div>
+		<form name='f' th:action="@{/manager/newGrey}" method='POST'>
+
+			<input type="text" id="domain_name" name="domain_name"> 
+			<input type="submit" value="Add new WhiteList">
+		</form>
+	</div>
+
+	<hr>
+	<table>
+		<tr>
+			<th>GreyList Domain</th>
+			<th>Created by</th>
+			<th>Created Date</th>
+			<th></th>
+
+		</tr>
+		<tr th:each="all_grey : ${all_grey}">
+			<td th:utext="${all_grey.domainName}"></td>
+			<td th:utext="${all_grey.appUser.userName}"></td>
+<td th:utext="${all_grey.createdDate}"></td>
+				<!-- <td th:text="${all_users.enabled} ? 'Active' : 'Disable'"></td> -->
+
+
+
+		</tr>
+
+	</table>
+
+</body>
+
+</html>

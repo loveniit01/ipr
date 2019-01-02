@@ -50,15 +50,13 @@ public class WhiteListController {
 			whitelistData.setAppUser(userDao.findUserAccount(principal.getName()));
 			whitelistDao.save(whitelistData);
 			
-//			List<WhitelistData> all_white = new ArrayList<>();
-			List<WhitelistData> all_white = 	whitelistDao.allData(); 
-			model.addAttribute("all_white", all_white);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		
+		List<WhitelistData> all_white = 	whitelistDao.allData(); 
+		model.addAttribute("all_white", all_white);
 		return "/adminarea/whiteList_new";
 	}
 	

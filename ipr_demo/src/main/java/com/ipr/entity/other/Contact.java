@@ -25,6 +25,7 @@ public class Contact implements java.io.Serializable {
 	private String designation;
 	private String mailId;
 	private String phone;
+	private String address;
 	private Long mobile1;
 	private Long mobile2;
 	private long createdBy;
@@ -39,7 +40,7 @@ public class Contact implements java.io.Serializable {
 		this.createdBy = createdBy;
 	}
 
-	public Contact(long id, long accountId, String firstName, String middleName, String lastName, String designation,
+	public Contact(long id, long accountId, String firstName, String middleName, String lastName, String designation,String address,
 			String mailId, String phone, Long mobile1, Long mobile2, long createdBy, Date createdDate) {
 		this.id = id;
 		this.accountId = accountId;
@@ -53,6 +54,7 @@ public class Contact implements java.io.Serializable {
 		this.mobile2 = mobile2;
 		this.createdBy = createdBy;
 		this.createdDate = createdDate;
+		this.address=address;
 	}
 
 	@Id
@@ -114,6 +116,16 @@ public class Contact implements java.io.Serializable {
 	@Column(name = "mail_id", unique = true, length = 100)
 	public String getMailId() {
 		return this.mailId;
+	}
+	
+	
+	@Column(name = "address",  length = 5000)
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public void setMailId(String mailId) {

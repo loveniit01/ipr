@@ -15,15 +15,15 @@ import javax.persistence.UniqueConstraint;
 public class ProjectTypes implements java.io.Serializable {
 
 	private int id;
-	private long accountId;
+//	private long accountId;
 	private String projectType;
 
 	public ProjectTypes() {
 	}
 
-	public ProjectTypes(int id, long accountId, String projectType) {
+	public ProjectTypes(int id,  String projectType) {
 		this.id = id;
-		this.accountId = accountId;
+//		this.accountId = accountId;
 		this.projectType = projectType;
 	}
 
@@ -38,14 +38,7 @@ public class ProjectTypes implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "account_id", nullable = false)
-	public long getAccountId() {
-		return this.accountId;
-	}
-
-	public void setAccountId(long accountId) {
-		this.accountId = accountId;
-	}
+	
 
 	@Column(name = "project_type", unique = true, nullable = false, length = 50)
 	public String getProjectType() {

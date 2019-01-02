@@ -84,8 +84,7 @@ public class GreylistData implements java.io.Serializable {
 		this.domainName = domainName;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "created_date", nullable = false, length = 19)
+	@Column(name = "created_date", length = 19, nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	public Date getCreatedDate() {
 		return this.createdDate;
 	}

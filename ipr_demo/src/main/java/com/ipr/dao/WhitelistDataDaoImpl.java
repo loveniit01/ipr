@@ -24,6 +24,7 @@ public class WhitelistDataDaoImpl implements WhitelistDataDao {
 	@Override
 	public <S extends WhitelistData> S save(S entity) {
 		// TODO Auto-generated method stub
+		entityManager.persist(entity);
 		return null;
 	}
 

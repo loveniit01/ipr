@@ -21,6 +21,7 @@ public class GreylistDataDaoImpl implements GreylistDataDao {
 	@Override
 	public <S extends GreylistData> S save(S entity) {
 		// TODO Auto-generated method stub
+		entityManager.persist(entity);
 		return null;
 	}
 
@@ -90,8 +91,9 @@ public class GreylistDataDaoImpl implements GreylistDataDao {
 	@Override
 	public List<GreylistData> allData() {
 		// TODO Auto-generated method stub
-		List<GreylistData> greylist = (List<GreylistData>) entityManager
-				.createQuery("select gd from " + GreylistData.class.getName() + " gd");
+		Query query = entityManager.createQuery("select gd from " + GreylistData.class.getName() + " gd");
+		
+		List<GreylistData> greylist = query.getResultList();
 
 		return greylist;
 

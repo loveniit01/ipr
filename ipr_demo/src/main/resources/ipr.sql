@@ -13,10 +13,12 @@
 
 
 -- Dumping database structure for ipr_data
+DROP DATABASE IF EXISTS `ipr_data`;
 CREATE DATABASE IF NOT EXISTS `ipr_data` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
 USE `ipr_data`;
 
 -- Dumping structure for table ipr_data.account
+DROP TABLE IF EXISTS `account`;
 CREATE TABLE IF NOT EXISTS `account` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `account_name` varchar(250) DEFAULT NULL,
@@ -33,14 +35,18 @@ CREATE TABLE IF NOT EXISTS `account` (
   UNIQUE KEY `UK66b2x5ot43owp5bsh5pk3jw3n` (`website`),
   KEY `FK_account_app_user` (`created_by`),
   CONSTRAINT `FK_account_app_user` FOREIGN KEY (`created_by`) REFERENCES `app_user` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table ipr_data.account: ~0 rows (approximately)
+-- Dumping data for table ipr_data.account: ~2 rows (approximately)
 DELETE FROM `account`;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
+INSERT INTO `account` (`id`, `account_name`, `mail_id`, `contact`, `address`, `website`, `created_by`, `created_date`) VALUES
+	(1, 'abp', 'aa@aa.aa', NULL, NULL, 'aa.aa.com', 1, '2019-01-02 11:29:49'),
+	(2, 'xyz', 'xyz.xyz.com', NULL, NULL, 'xyzzzzz.com', 1, '2019-01-02 12:07:18');
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 
 -- Dumping structure for table ipr_data.app_role
+DROP TABLE IF EXISTS `app_role`;
 CREATE TABLE IF NOT EXISTS `app_role` (
   `ROLE_ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `ROLE_NAME` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
@@ -48,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `app_role` (
   UNIQUE KEY `APP_ROLE_UK` (`ROLE_NAME`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
--- Dumping data for table ipr_data.app_role: ~3 rows (approximately)
+-- Dumping data for table ipr_data.app_role: ~4 rows (approximately)
 DELETE FROM `app_role`;
 /*!40000 ALTER TABLE `app_role` DISABLE KEYS */;
 INSERT INTO `app_role` (`ROLE_ID`, `ROLE_NAME`) VALUES
@@ -59,6 +65,7 @@ INSERT INTO `app_role` (`ROLE_ID`, `ROLE_NAME`) VALUES
 /*!40000 ALTER TABLE `app_role` ENABLE KEYS */;
 
 -- Dumping structure for table ipr_data.app_user
+DROP TABLE IF EXISTS `app_user`;
 CREATE TABLE IF NOT EXISTS `app_user` (
   `USER_ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `USER_NAME` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
@@ -66,9 +73,9 @@ CREATE TABLE IF NOT EXISTS `app_user` (
   `ENABLED` bit(1) NOT NULL,
   PRIMARY KEY (`USER_ID`),
   UNIQUE KEY `APP_USER_UK` (`USER_NAME`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
--- Dumping data for table ipr_data.app_user: ~4 rows (approximately)
+-- Dumping data for table ipr_data.app_user: ~7 rows (approximately)
 DELETE FROM `app_user`;
 /*!40000 ALTER TABLE `app_user` DISABLE KEYS */;
 INSERT INTO `app_user` (`USER_ID`, `USER_NAME`, `ENCRYTED_PASSWORD`, `ENABLED`) VALUES
@@ -77,10 +84,12 @@ INSERT INTO `app_user` (`USER_ID`, `USER_NAME`, `ENCRYTED_PASSWORD`, `ENABLED`) 
 	(3, 'dbmanager', '$2a$10$1l9PJTwz.DeQt0YzWRBhYev1.SARsBdJwcJLaDXOeaioVCqAVlXwe', b'1'),
 	(4, 'dbteamlead', '$2a$10$1l9PJTwz.DeQt0YzWRBhYev1.SARsBdJwcJLaDXOeaioVCqAVlXwe', b'1'),
 	(6, 'rahul', '$2a$10$TNI6A0BzWeMgmciuTs/oCe6BWZxvLHYVPkAgWVkciU5OIJw7yYE6e', b'1'),
-	(7, 'rahul1', '$2a$10$0ENst6cSdPZbDTPkxUSbWuoUWH0aiZg6lvItZAHH2YGU9zelrt4VS', b'1');
+	(7, 'rahul1', '$2a$10$0ENst6cSdPZbDTPkxUSbWuoUWH0aiZg6lvItZAHH2YGU9zelrt4VS', b'1'),
+	(9, 'rahul2', '$2a$10$5cHD10lapMAAUyAt7JClmu0hf5sBnZ4ksj31cSXxtIsk01IIPzFEW', b'0');
 /*!40000 ALTER TABLE `app_user` ENABLE KEYS */;
 
 -- Dumping structure for table ipr_data.app_user_details
+DROP TABLE IF EXISTS `app_user_details`;
 CREATE TABLE IF NOT EXISTS `app_user_details` (
   `USER_ID_ID` bigint(20) NOT NULL,
   `user_first_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
@@ -124,39 +133,41 @@ DELETE FROM `app_user_details`;
 /*!40000 ALTER TABLE `app_user_details` ENABLE KEYS */;
 
 -- Dumping structure for view ipr_data.app_user_detail_view
+DROP VIEW IF EXISTS `app_user_detail_view`;
 -- Creating temporary table to overcome VIEW dependency errors
 CREATE TABLE `app_user_detail_view` (
-	`address` VARCHAR(750) NULL COLLATE 'utf8mb4_bin',
-	`blood_group` VARCHAR(3) NULL COLLATE 'utf8mb4_bin',
-	`created_by` BIGINT(20) NOT NULL,
-	`created_date` DATETIME NOT NULL,
-	`disable_by` BIGINT(20) NOT NULL,
-	`disable_date` DATETIME NULL,
-	`dob_date` TINYINT(4) NULL,
-	`dob_month` TINYINT(4) NULL,
-	`dob_year` SMALLINT(6) NULL COMMENT 'date of birth',
-	`doj_date` TINYINT(4) NULL,
-	`doj_month` TINYINT(4) NULL,
-	`doj_year` SMALLINT(6) NULL COMMENT 'date of joining',
-	`ENABLED` BIT(1) NULL,
-	`ENCRYTED_PASSWORD` VARCHAR(128) NULL COLLATE 'utf8mb4_bin',
-	`father_mobile_no` BIGINT(20) NULL,
-	`father_name` VARCHAR(100) NULL COLLATE 'utf8mb4_bin',
-	`home_phone_no` BIGINT(20) NULL,
-	`id_number` VARCHAR(50) NULL COLLATE 'utf8mb4_bin',
-	`id_type` VARCHAR(50) NULL COLLATE 'utf8mb4_bin',
+	`USER_ID_ID` BIGINT(20) NOT NULL,
+	`user_first_name` VARCHAR(50) NULL COLLATE 'utf8mb4_bin',
+	`user_last_name` VARCHAR(50) NULL COLLATE 'utf8mb4_bin',
 	`mail_id_ofc` VARCHAR(50) NULL COLLATE 'utf8mb4_bin',
 	`mail_id_personal` VARCHAR(50) NULL COLLATE 'utf8mb4_bin',
 	`mobile_no` BIGINT(20) NULL,
 	`phone_no` BIGINT(20) NULL,
-	`user_first_name` VARCHAR(50) NULL COLLATE 'utf8mb4_bin',
+	`dob_year` SMALLINT(6) NULL COMMENT 'date of birth',
+	`dob_month` TINYINT(4) NULL,
+	`dob_date` TINYINT(4) NULL,
+	`doj_year` SMALLINT(6) NULL COMMENT 'date of joining',
+	`doj_month` TINYINT(4) NULL,
+	`doj_date` TINYINT(4) NULL,
+	`id_type` VARCHAR(50) NULL COLLATE 'utf8mb4_bin',
+	`id_number` VARCHAR(50) NULL COLLATE 'utf8mb4_bin',
+	`father_name` VARCHAR(100) NULL COLLATE 'utf8mb4_bin',
+	`father_mobile_no` BIGINT(20) NULL,
+	`home_phone_no` BIGINT(20) NULL,
+	`address` VARCHAR(750) NULL COLLATE 'utf8mb4_bin',
+	`blood_group` VARCHAR(3) NULL COLLATE 'utf8mb4_bin',
+	`created_by` BIGINT(20) NOT NULL,
+	`created_date` DATETIME NOT NULL,
+	`disable_date` DATETIME NULL,
+	`disable_by` BIGINT(20) NOT NULL,
 	`USER_ID` BIGINT(20) NULL,
-	`USER_ID_ID` BIGINT(20) NOT NULL,
-	`user_last_name` VARCHAR(50) NULL COLLATE 'utf8mb4_bin',
-	`USER_NAME` VARCHAR(36) NULL COLLATE 'utf8mb4_bin'
+	`USER_NAME` VARCHAR(36) NULL COLLATE 'utf8mb4_bin',
+	`ENCRYTED_PASSWORD` VARCHAR(128) NULL COLLATE 'utf8mb4_bin',
+	`ENABLED` BIT(1) NULL
 ) ENGINE=MyISAM;
 
 -- Dumping structure for table ipr_data.contact
+DROP TABLE IF EXISTS `contact`;
 CREATE TABLE IF NOT EXISTS `contact` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `account_id` bigint(20) NOT NULL DEFAULT '0',
@@ -165,6 +176,7 @@ CREATE TABLE IF NOT EXISTS `contact` (
   `last_name` varchar(100) DEFAULT NULL,
   `designation` varchar(100) DEFAULT NULL,
   `mail_id` varchar(100) DEFAULT NULL,
+  `address` varchar(5000) DEFAULT NULL,
   `phone` varchar(100) DEFAULT NULL,
   `mobile1` bigint(20) DEFAULT NULL,
   `mobile2` bigint(20) DEFAULT NULL,
@@ -175,14 +187,18 @@ CREATE TABLE IF NOT EXISTS `contact` (
   UNIQUE KEY `UK5lmtxhvlrg3batmo2wkfklmrs` (`mail_id`),
   KEY `FK_contact_account` (`account_id`),
   KEY `FK_contact_app_user` (`created_by`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table ipr_data.contact: ~0 rows (approximately)
+-- Dumping data for table ipr_data.contact: ~2 rows (approximately)
 DELETE FROM `contact`;
 /*!40000 ALTER TABLE `contact` DISABLE KEYS */;
+INSERT INTO `contact` (`id`, `account_id`, `first_name`, `middle_name`, `last_name`, `designation`, `mail_id`, `address`, `phone`, `mobile1`, `mobile2`, `created_by`, `created_date`) VALUES
+	(1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+	(2, 2, NULL, NULL, NULL, NULL, 'xyz.xyz.com', NULL, NULL, NULL, NULL, 1, '2019-01-02 12:07:18');
 /*!40000 ALTER TABLE `contact` ENABLE KEYS */;
 
 -- Dumping structure for table ipr_data.greylist_data
+DROP TABLE IF EXISTS `greylist_data`;
 CREATE TABLE IF NOT EXISTS `greylist_data` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `domain_name` varchar(100) NOT NULL,
@@ -196,17 +212,19 @@ CREATE TABLE IF NOT EXISTS `greylist_data` (
   UNIQUE KEY `UK74xroffeuq0baj8hcdjclklur` (`domain_name`),
   KEY `FK_greylist_data_app_user` (`created_by`),
   CONSTRAINT `FK_greylist_data_app_user` FOREIGN KEY (`created_by`) REFERENCES `app_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table ipr_data.greylist_data: ~2 rows (approximately)
+-- Dumping data for table ipr_data.greylist_data: ~3 rows (approximately)
 DELETE FROM `greylist_data`;
 /*!40000 ALTER TABLE `greylist_data` DISABLE KEYS */;
 INSERT INTO `greylist_data` (`id`, `domain_name`, `created_by`, `created_date`, `deleted`, `deleted_by`, `deleted_date`) VALUES
 	(1, 'abpnews.com', 1, '2018-12-27 16:11:28', 0, 0, NULL),
-	(2, 'zeenews.com', 1, '2018-12-27 16:11:38', 0, 0, NULL);
+	(2, 'zeenews.com', 1, '2018-12-27 16:11:38', 0, 0, NULL),
+	(3, 'aaa.com', 3, '2019-01-02 10:38:34', 0, 0, NULL);
 /*!40000 ALTER TABLE `greylist_data` ENABLE KEYS */;
 
 -- Dumping structure for table ipr_data.hibernate_sequence
+DROP TABLE IF EXISTS `hibernate_sequence`;
 CREATE TABLE IF NOT EXISTS `hibernate_sequence` (
   `next_val` bigint(20) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -215,12 +233,13 @@ CREATE TABLE IF NOT EXISTS `hibernate_sequence` (
 DELETE FROM `hibernate_sequence`;
 /*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-	(9),
-	(9),
-	(9);
+	(11),
+	(11),
+	(11);
 /*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
 
 -- Dumping structure for table ipr_data.persistent_logins
+DROP TABLE IF EXISTS `persistent_logins`;
 CREATE TABLE IF NOT EXISTS `persistent_logins` (
   `username` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `series` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
@@ -235,6 +254,7 @@ DELETE FROM `persistent_logins`;
 /*!40000 ALTER TABLE `persistent_logins` ENABLE KEYS */;
 
 -- Dumping structure for table ipr_data.project
+DROP TABLE IF EXISTS `project`;
 CREATE TABLE IF NOT EXISTS `project` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `project_types_id` int(11) NOT NULL DEFAULT '0',
@@ -255,30 +275,34 @@ CREATE TABLE IF NOT EXISTS `project` (
   KEY `FK_project_account_id` (`account_id`),
   KEY `FK_project_app_user` (`deactivated_by`),
   KEY `FK_project_app_user_2` (`created_by`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table ipr_data.project: ~0 rows (approximately)
+-- Dumping data for table ipr_data.project: ~1 rows (approximately)
 DELETE FROM `project`;
 /*!40000 ALTER TABLE `project` DISABLE KEYS */;
+INSERT INTO `project` (`id`, `project_types_id`, `account_id`, `project_name`, `channel_name`, `project_url`, `contract_url`, `created_by`, `created_time`, `deactivate`, `deactivated_by`, `deactivated_date`) VALUES
+	(1, 1, 1, 'aha wha', 'zee', 'dhfdh//happt.com', NULL, 1, '2019-01-02 11:31:27', 0000, NULL, NULL);
 /*!40000 ALTER TABLE `project` ENABLE KEYS */;
 
 -- Dumping structure for table ipr_data.project_types
+DROP TABLE IF EXISTS `project_types`;
 CREATE TABLE IF NOT EXISTS `project_types` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `account_id` bigint(20) NOT NULL DEFAULT '0',
   `project_type` varchar(50) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `project_type` (`project_type`),
-  UNIQUE KEY `UKme9xh2spprnxc67evvp6gvpav` (`project_type`),
-  KEY `FK_project_account` (`account_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `UKme9xh2spprnxc67evvp6gvpav` (`project_type`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table ipr_data.project_types: ~0 rows (approximately)
+-- Dumping data for table ipr_data.project_types: ~1 rows (approximately)
 DELETE FROM `project_types`;
 /*!40000 ALTER TABLE `project_types` DISABLE KEYS */;
+INSERT INTO `project_types` (`id`, `project_type`) VALUES
+	(1, 'music');
 /*!40000 ALTER TABLE `project_types` ENABLE KEYS */;
 
 -- Dumping structure for table ipr_data.upload_data
+DROP TABLE IF EXISTS `upload_data`;
 CREATE TABLE IF NOT EXISTS `upload_data` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `link` varchar(250) NOT NULL,
@@ -297,10 +321,11 @@ CREATE TABLE IF NOT EXISTS `upload_data` (
   `is_greylist` tinyint(4) NOT NULL DEFAULT '0',
   `is_deleted` int(11) NOT NULL DEFAULT '0' COMMENT 'store datetime in integer format',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `unique key` (`link`,`project_id`,`domain_name`,`link_type`,`is_deleted`)
+  UNIQUE KEY `unique key` (`link`,`project_id`,`domain_name`,`link_type`,`is_deleted`),
+  UNIQUE KEY `UKrbu5l9lvnxa097jidmydlokhx` (`link`,`project_id`,`domain_name`,`link_type`,`is_deleted`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table ipr_data.upload_data: ~2 rows (approximately)
+-- Dumping data for table ipr_data.upload_data: ~3 rows (approximately)
 DELETE FROM `upload_data`;
 /*!40000 ALTER TABLE `upload_data` DISABLE KEYS */;
 INSERT INTO `upload_data` (`id`, `link`, `project_id`, `domain_name`, `source_link`, `note1`, `note2`, `note3`, `upload_time`, `link_type`, `is_manual`, `user_id`, `project_type`, `is_whitelist`, `is_greylist`, `is_deleted`) VALUES
@@ -310,6 +335,7 @@ INSERT INTO `upload_data` (`id`, `link`, `project_id`, `domain_name`, `source_li
 /*!40000 ALTER TABLE `upload_data` ENABLE KEYS */;
 
 -- Dumping structure for table ipr_data.upload_data_action
+DROP TABLE IF EXISTS `upload_data_action`;
 CREATE TABLE IF NOT EXISTS `upload_data_action` (
   `upload_data_id` bigint(20) DEFAULT NULL,
   `direct_notice` tinyint(4) NOT NULL DEFAULT '0',
@@ -330,7 +356,7 @@ CREATE TABLE IF NOT EXISTS `upload_data_action` (
   UNIQUE KEY `UK19mxgqucn8r8prth4lvfnuk7k` (`upload_data_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table ipr_data.upload_data_action: ~6 rows (approximately)
+-- Dumping data for table ipr_data.upload_data_action: ~3 rows (approximately)
 DELETE FROM `upload_data_action`;
 /*!40000 ALTER TABLE `upload_data_action` DISABLE KEYS */;
 INSERT INTO `upload_data_action` (`upload_data_id`, `direct_notice`, `invalid`, `invalid_by`, `invalid_date`, `invalid_reason`, `qc1`, `qc1_user`, `qc1_time`, `qc2`, `qc2_user`, `qc2_time`, `data_Notify`, `data_notify_user`, `fource_notify`) VALUES
@@ -340,6 +366,7 @@ INSERT INTO `upload_data_action` (`upload_data_id`, `direct_notice`, `invalid`, 
 /*!40000 ALTER TABLE `upload_data_action` ENABLE KEYS */;
 
 -- Dumping structure for table ipr_data.user_performance_detect
+DROP TABLE IF EXISTS `user_performance_detect`;
 CREATE TABLE IF NOT EXISTS `user_performance_detect` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -364,7 +391,32 @@ DELETE FROM `user_performance_detect`;
 /*!40000 ALTER TABLE `user_performance_detect` DISABLE KEYS */;
 /*!40000 ALTER TABLE `user_performance_detect` ENABLE KEYS */;
 
+-- Dumping structure for table ipr_data.user_performance_detect_view
+DROP TABLE IF EXISTS `user_performance_detect_view`;
+CREATE TABLE IF NOT EXISTS `user_performance_detect_view` (
+  `fb_count` int(11) NOT NULL,
+  `gl_count` int(11) NOT NULL,
+  `infringing_count` int(11) NOT NULL,
+  `insta_count` int(11) NOT NULL,
+  `invalid_count` int(11) NOT NULL,
+  `source_count` int(11) NOT NULL,
+  `twitter_count` int(11) NOT NULL,
+  `user_first_name` varchar(50) NOT NULL,
+  `user_id_id` bigint(20) NOT NULL,
+  `user_last_name` varchar(50) NOT NULL,
+  `wl_count` int(11) NOT NULL,
+  `work_date` datetime NOT NULL,
+  `yt_count` int(11) NOT NULL,
+  PRIMARY KEY (`fb_count`,`gl_count`,`infringing_count`,`insta_count`,`invalid_count`,`source_count`,`twitter_count`,`user_first_name`,`user_id_id`,`user_last_name`,`wl_count`,`work_date`,`yt_count`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Dumping data for table ipr_data.user_performance_detect_view: 0 rows
+DELETE FROM `user_performance_detect_view`;
+/*!40000 ALTER TABLE `user_performance_detect_view` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_performance_detect_view` ENABLE KEYS */;
+
 -- Dumping structure for table ipr_data.user_performance_notice
+DROP TABLE IF EXISTS `user_performance_notice`;
 CREATE TABLE IF NOT EXISTS `user_performance_notice` (
   `Column 1` bigint(20) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`Column 1`)
@@ -376,6 +428,7 @@ DELETE FROM `user_performance_notice`;
 /*!40000 ALTER TABLE `user_performance_notice` ENABLE KEYS */;
 
 -- Dumping structure for table ipr_data.user_role
+DROP TABLE IF EXISTS `user_role`;
 CREATE TABLE IF NOT EXISTS `user_role` (
   `ID` bigint(20) NOT NULL AUTO_INCREMENT,
   `USER_ID` bigint(20) NOT NULL,
@@ -387,9 +440,9 @@ CREATE TABLE IF NOT EXISTS `user_role` (
   CONSTRAINT `FK_user_role_app_user` FOREIGN KEY (`USER_ID`) REFERENCES `app_user` (`user_id`),
   CONSTRAINT `FKg7fr1r7o0fkk41nfhnjdyqn7b` FOREIGN KEY (`USER_ID`) REFERENCES `app_user` (`user_id`),
   CONSTRAINT `FKp6m37g6n6c288s096400uw8fw` FOREIGN KEY (`ROLE_ID`) REFERENCES `app_role` (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
--- Dumping data for table ipr_data.user_role: ~6 rows (approximately)
+-- Dumping data for table ipr_data.user_role: ~8 rows (approximately)
 DELETE FROM `user_role`;
 /*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
 INSERT INTO `user_role` (`ID`, `USER_ID`, `ROLE_ID`) VALUES
@@ -399,10 +452,12 @@ INSERT INTO `user_role` (`ID`, `USER_ID`, `ROLE_ID`) VALUES
 	(3, 2, 2),
 	(6, 3, 2),
 	(5, 3, 3),
-	(8, 7, 2);
+	(8, 7, 2),
+	(10, 9, 2);
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 
 -- Dumping structure for table ipr_data.whitelist_data
+DROP TABLE IF EXISTS `whitelist_data`;
 CREATE TABLE IF NOT EXISTS `whitelist_data` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `domain_name` varchar(100) NOT NULL,
@@ -416,29 +471,45 @@ CREATE TABLE IF NOT EXISTS `whitelist_data` (
   UNIQUE KEY `UKa2e4iv3evxmru2iy2wuuapj36` (`domain_name`),
   KEY `FK_whitelist_data_app_user` (`created_by`),
   CONSTRAINT `FK_whitelist_data_app_user` FOREIGN KEY (`created_by`) REFERENCES `app_user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table ipr_data.whitelist_data: ~2 rows (approximately)
+-- Dumping data for table ipr_data.whitelist_data: ~4 rows (approximately)
 DELETE FROM `whitelist_data`;
 /*!40000 ALTER TABLE `whitelist_data` DISABLE KEYS */;
 INSERT INTO `whitelist_data` (`id`, `domain_name`, `created_by`, `created_date`, `deleted`, `deleted_by`, `deleted_date`) VALUES
 	(2, 'google.com', 1, '2018-12-27 16:10:54', 0, 0, NULL),
-	(3, 'youtube.com', 1, '2018-12-27 16:11:07', 0, 0, NULL);
+	(3, 'youtube.com', 1, '2018-12-27 16:11:07', 0, 0, NULL),
+	(4, 'facebook.com', 1, '2019-01-02 10:14:35', 0, 0, NULL),
+	(6, 'aaa.com', 1, '2019-01-02 10:15:35', 0, 0, NULL);
 /*!40000 ALTER TABLE `whitelist_data` ENABLE KEYS */;
 
 -- Dumping structure for trigger ipr_data.account_after_insert
+DROP TRIGGER IF EXISTS `account_after_insert`;
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION';
 DELIMITER //
 CREATE TRIGGER `account_after_insert` AFTER INSERT ON `account` FOR EACH ROW BEGIN
 
 insert into contact
-set contact.account_id = new.id;
+set contact.account_id = new.id, contact.mail_id =  new.mail_id, contact.created_by = new.created_by, contact.created_date =  new.created_date;
+
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+-- Dumping structure for trigger ipr_data.app_user_after_insert
+DROP TRIGGER IF EXISTS `app_user_after_insert`;
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER `app_user_after_insert` AFTER INSERT ON `app_user` FOR EACH ROW BEGIN
+
+insert into app_user_details set app_user_details.USER_ID_ID = new.USER_ID;
 
 END//
 DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
 -- Dumping structure for trigger ipr_data.upload_data_tgr
+DROP TRIGGER IF EXISTS `upload_data_tgr`;
 SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION';
 DELIMITER //
 CREATE TRIGGER `upload_data_tgr` AFTER INSERT ON `upload_data` FOR EACH ROW BEGIN
@@ -451,6 +522,7 @@ DELIMITER ;
 SET SQL_MODE=@OLDTMP_SQL_MODE;
 
 -- Dumping structure for view ipr_data.app_user_detail_view
+DROP VIEW IF EXISTS `app_user_detail_view`;
 -- Removing temporary table and create final VIEW structure
 DROP TABLE IF EXISTS `app_user_detail_view`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`myuser`@`%` SQL SECURITY DEFINER VIEW `app_user_detail_view` AS select `aud`.`USER_ID_ID` AS `USER_ID_ID`,`aud`.`user_first_name` AS `user_first_name`,`aud`.`user_last_name` AS `user_last_name`,`aud`.`mail_id_ofc` AS `mail_id_ofc`,`aud`.`mail_id_personal` AS `mail_id_personal`,`aud`.`mobile_no` AS `mobile_no`,`aud`.`phone_no` AS `phone_no`,`aud`.`dob_year` AS `dob_year`,`aud`.`dob_month` AS `dob_month`,`aud`.`dob_date` AS `dob_date`,`aud`.`doj_year` AS `doj_year`,`aud`.`doj_month` AS `doj_month`,`aud`.`doj_date` AS `doj_date`,`aud`.`id_type` AS `id_type`,`aud`.`id_number` AS `id_number`,`aud`.`father_name` AS `father_name`,`aud`.`father_mobile_no` AS `father_mobile_no`,`aud`.`home_phone_no` AS `home_phone_no`,`aud`.`address` AS `address`,`aud`.`blood_group` AS `blood_group`,`aud`.`created_by` AS `created_by`,`aud`.`created_date` AS `created_date`,`aud`.`disable_date` AS `disable_date`,`aud`.`disable_by` AS `disable_by`,`au`.`USER_ID` AS `USER_ID`,`au`.`USER_NAME` AS `USER_NAME`,`au`.`ENCRYTED_PASSWORD` AS `ENCRYTED_PASSWORD`,`au`.`ENABLED` AS `ENABLED` from (`app_user_details` `aud` left join `app_user` `au` on((`au`.`USER_ID` = `aud`.`USER_ID_ID`)));
