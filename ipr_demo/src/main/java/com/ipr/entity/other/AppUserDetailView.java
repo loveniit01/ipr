@@ -1,5 +1,5 @@
 package com.ipr.entity.other;
-// Generated 28 Dec, 2018 2:44:56 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated 3 Jan, 2019 3:16:32 PM by Hibernate Tools 5.1.0.Alpha1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -48,7 +48,7 @@ public class AppUserDetailView implements java.io.Serializable {
 			@AttributeOverride(name = "address", column = @Column(name = "address", length = 750)),
 			@AttributeOverride(name = "bloodGroup", column = @Column(name = "blood_group", length = 3)),
 			@AttributeOverride(name = "createdBy", column = @Column(name = "created_by", nullable = false)),
-			@AttributeOverride(name = "createdDate", column = @Column(name = "created_date", length = 19)),
+			@AttributeOverride(name = "createdDate", column = @Column(name = "created_date", nullable = false, length = 19)),
 			@AttributeOverride(name = "disableDate", column = @Column(name = "disable_date", length = 19)),
 			@AttributeOverride(name = "disableBy", column = @Column(name = "disable_by", nullable = false)),
 			@AttributeOverride(name = "userId", column = @Column(name = "USER_ID")),

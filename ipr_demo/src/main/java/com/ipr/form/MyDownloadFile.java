@@ -7,11 +7,17 @@ public class MyDownloadFile {
 	}
 
 	long id, project_id;
-	int whitelist, greylist;
+	int whitelist, greylist, linkType;
 	String link, domain, project_name, channel_name, source_link, uploaded_by, uploaded_date, client_name, project_type, project_url, note1, note2, note3;
 	
 	
 	
+	public int getLinkType() {
+		return linkType;
+	}
+	public void setLinkType(int linkType) {
+		this.linkType = linkType;
+	}
 	public String getNote1() {
 		return note1;
 	}

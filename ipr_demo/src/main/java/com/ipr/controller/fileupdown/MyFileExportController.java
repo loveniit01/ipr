@@ -22,6 +22,7 @@ import org.supercsv.prefs.CsvPreference;
 import com.ipr.dao.DownloadDataDao;
 import com.ipr.form.MyDownloadFile;
 import com.ipr.form.MyUploadForm;
+import com.ipr.utils.DateUtils;
 import com.ipr.utils.WriteCsvToResponse;
 
 @Controller
@@ -35,6 +36,8 @@ public class MyFileExportController {
 
 	@Autowired
 	DownloadDataDao downloadDao;
+	@Autowired
+	DateUtils dateUtil;
 
 	// GET: Show download form page.
 	@RequestMapping(value = "/downloadOneFile", method = RequestMethod.GET)
@@ -62,21 +65,26 @@ public class MyFileExportController {
 			downloadFile.setLink((String) obj[1]);
 
 			downloadFile.setDomain((String) obj[2]);
+			downloadFile.setSource_link((String) obj[3]);
 //			String project_id=  obj[3].toString();
-			downloadFile.setProject_id(Long.parseLong(obj[3].toString()));
-			downloadFile.setProject_name((String) obj[4]);
-			downloadFile.setChannel_name((String) obj[5]);
-			downloadFile.setProject_type((String) obj[6]);
-			downloadFile.setClient_name((String) obj[7]);
-			downloadFile.setProject_name((String) obj[8]);
-			downloadFile.setUploaded_by((String) obj[9]);
+			downloadFile.setProject_id(Long.parseLong(obj[4].toString()));
+			downloadFile.setProject_name((String) obj[5]);
+			downloadFile.setChannel_name((String) obj[6]);
+			downloadFile.setProject_type((String) obj[7]);
+			downloadFile.setClient_name((String) obj[8]);
+			downloadFile.setProject_url((String) obj[9]);
+			
+//			downloadFile.setUploaded_by((String) obj[9]);
+			
+			downloadFile.setUploaded_by((String) obj[10]);
 
-			downloadFile.setUploaded_date( obj[10].toString());
-			downloadFile.setNote1((String) obj[11]);
-			downloadFile.setNote2((String) obj[12]);
-			downloadFile.setNote3((String) obj[13]);
-			downloadFile.setWhitelist(Integer.parseInt( obj[14].toString()));
-			downloadFile.setGreylist(Integer.parseInt(obj[15].toString()));
+			downloadFile.setUploaded_date((obj[11].toString()));
+			downloadFile.setNote1((String) obj[12]);
+			downloadFile.setNote2((String) obj[13]);
+			downloadFile.setNote3((String) obj[14]);
+			downloadFile.setWhitelist(Integer.parseInt( obj[15].toString()));
+			downloadFile.setGreylist(Integer.parseInt(obj[16].toString()));
+			downloadFile.setLinkType(Integer.parseInt(obj[17].toString()));
 			downloadData.add(downloadFile);
 		}
 
@@ -91,12 +99,12 @@ public class MyFileExportController {
 
 			ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
 
-			String[] header = { "ID", "Link", "Domain Name", "Project ID", "Project Name", "Project Type",
+			String[] header = { "ID", "Link", "Domain Name","Source Link", "Project ID", "Project Name", "Project Type",
 					"Channel Name", "Account Name", "Project URL", "Note1", "Note2", "Note3", "User Name",
-					"Upload Date", "White List", "Grey List" };
+					"Upload Date", "White List", "Grey List","Link Type" };
 			csvWriter.writeHeader(header);
 			
-			String[]headercompair = {"id","link","domain","project_id","project_name","project_type","channel_name","client_name","project_url","note1","note2","note3","uploaded_by","uploaded_date", "whitelist","greylist"};
+			String[]headercompair = {"id","link","domain","source_link","project_id","project_name","project_type","channel_name","client_name","project_url","note1","note2","note3","uploaded_by","uploaded_date", "whitelist","greylist","linkType"};
 
 			for (MyDownloadFile aBook : downloadData) {
 				csvWriter.write(aBook, headercompair);

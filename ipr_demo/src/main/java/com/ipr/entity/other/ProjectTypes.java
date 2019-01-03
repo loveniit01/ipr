@@ -1,9 +1,13 @@
 package com.ipr.entity.other;
-// Generated 28 Dec, 2018 2:44:56 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated 3 Jan, 2019 3:16:32 PM by Hibernate Tools 5.1.0.Alpha1
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -15,16 +19,21 @@ import javax.persistence.UniqueConstraint;
 public class ProjectTypes implements java.io.Serializable {
 
 	private int id;
-//	private long accountId;
 	private String projectType;
+	private Set<Project> projects = new HashSet<>(0);
 
 	public ProjectTypes() {
 	}
 
-	public ProjectTypes(int id,  String projectType) {
+	public ProjectTypes(int id, String projectType) {
 		this.id = id;
-//		this.accountId = accountId;
 		this.projectType = projectType;
+	}
+
+	public ProjectTypes(int id, String projectType, Set<Project>projects) {
+		this.id = id;
+		this.projectType = projectType;
+		this.projects = projects;
 	}
 
 	@Id
@@ -38,8 +47,6 @@ public class ProjectTypes implements java.io.Serializable {
 		this.id = id;
 	}
 
-	
-
 	@Column(name = "project_type", unique = true, nullable = false, length = 50)
 	public String getProjectType() {
 		return this.projectType;
@@ -47,6 +54,15 @@ public class ProjectTypes implements java.io.Serializable {
 
 	public void setProjectType(String projectType) {
 		this.projectType = projectType;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "projectTypes")
+	public Set<Project> getProjects() {
+		return this.projects;
+	}
+
+	public void setProjects(Set<Project> projects) {
+		this.projects = projects;
 	}
 
 }

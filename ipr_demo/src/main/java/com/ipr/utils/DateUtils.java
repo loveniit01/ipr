@@ -26,5 +26,12 @@ public class DateUtils {
 		String[] date__ = aa.split("/");
 		return date__;
 	}
+	
+	public String dateConversion(Long date__)
+	{
+		Date d = new Date(date__ );
+		DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
+		return df.format(d).toString();
+	}
 
 }

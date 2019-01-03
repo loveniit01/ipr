@@ -206,7 +206,7 @@ public class MyFileUploadController {
 								uploadData.setIsWhitelist((byte) wt);
 								uploadData.setIsGreylist((byte) gy);
 								uploadData
-										.setUserId(Integer.parseInt(session.getAttribute("userid").toString().trim()));
+										.setUserId(Long.parseLong(session.getAttribute("userid").toString().trim()));
 								uploadIMPL.saveUploadData(uploadData);
 								
 							}

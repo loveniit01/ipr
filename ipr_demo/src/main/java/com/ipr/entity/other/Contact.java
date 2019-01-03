@@ -1,10 +1,13 @@
 package com.ipr.entity.other;
-// Generated 28 Dec, 2018 2:44:56 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated 3 Jan, 2019 3:16:32 PM by Hibernate Tools 5.1.0.Alpha1
 
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,14 +21,14 @@ import javax.persistence.UniqueConstraint;
 public class Contact implements java.io.Serializable {
 
 	private long id;
-	private long accountId;
+	private Account account;
 	private String firstName;
 	private String middleName;
 	private String lastName;
 	private String designation;
 	private String mailId;
-	private String phone;
 	private String address;
+	private String phone;
 	private Long mobile1;
 	private Long mobile2;
 	private long createdBy;
@@ -34,27 +37,27 @@ public class Contact implements java.io.Serializable {
 	public Contact() {
 	}
 
-	public Contact(long id, long accountId, long createdBy) {
+	public Contact(long id, Account account, long createdBy) {
 		this.id = id;
-		this.accountId = accountId;
+		this.account = account;
 		this.createdBy = createdBy;
 	}
 
-	public Contact(long id, long accountId, String firstName, String middleName, String lastName, String designation,String address,
-			String mailId, String phone, Long mobile1, Long mobile2, long createdBy, Date createdDate) {
+	public Contact(long id, Account account, String firstName, String middleName, String lastName, String designation,
+			String mailId, String address, String phone, Long mobile1, Long mobile2, long createdBy, Date createdDate) {
 		this.id = id;
-		this.accountId = accountId;
+		this.account = account;
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
 		this.designation = designation;
 		this.mailId = mailId;
+		this.address = address;
 		this.phone = phone;
 		this.mobile1 = mobile1;
 		this.mobile2 = mobile2;
 		this.createdBy = createdBy;
 		this.createdDate = createdDate;
-		this.address=address;
 	}
 
 	@Id
@@ -68,13 +71,14 @@ public class Contact implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "account_id", nullable = false)
-	public long getAccountId() {
-		return this.accountId;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "account_id", nullable = false)
+	public Account getAccount() {
+		return this.account;
 	}
 
-	public void setAccountId(long accountId) {
-		this.accountId = accountId;
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
 	@Column(name = "first_name", length = 100)
@@ -117,19 +121,18 @@ public class Contact implements java.io.Serializable {
 	public String getMailId() {
 		return this.mailId;
 	}
-	
-	
-	@Column(name = "address",  length = 5000)
+
+	public void setMailId(String mailId) {
+		this.mailId = mailId;
+	}
+
+	@Column(name = "address", length = 5000)
 	public String getAddress() {
-		return address;
+		return this.address;
 	}
 
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	public void setMailId(String mailId) {
-		this.mailId = mailId;
 	}
 
 	@Column(name = "phone", length = 100)

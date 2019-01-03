@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:utext="${title}"></title>
+</head>
+<body>
+	<!-- Include _menu.html -->
+	<th:block th:include="/_menu"></th:block>
+
+	<h2>add new project Page</h2>
+	<!-- <h3>
+		Welcome : <span th:utext="${#request.userPrincipal.name}"></span>
+	</h3> -->
+	<b>This is protected page!</b>
+
+	<br />
+	<br />
+
+	<!-- <div th:if="${userInfo != null}" th:utext="${userInfo}"></div> -->
+
+	<div>
+		<form name='f' th:action="@{/manager/newProject}" method='POST'>
+			<table>
+				<tr>
+					<td>Project Name</td>
+					<td><input type="text" id="projectName" name="projectName"
+						placeholder="Project Name"></td>
+				</tr>
+				<tr>
+					<td>Channel Name</td>
+					<td><input type="text" id="channelName" name="channelName"
+						placeholder="Channel Name"></td>
+				</tr>
+
+				<tr>
+					<td>Account Name</td>
+					<td><select name="accountId" id="accountId">
+							<option value="">Select Account</option>
+
+
+							<th:block th:each="element : ${all_account}">
+								<option th:value="${element.id}">
+									<p th:utext="${element.accountName}"></p>
+								</option>
+							</th:block>
+
+					</select></td>
+				</tr>
+
+				<tr>
+					<td>Project Type</td>
+					<td><select name="projectTypesId" id="projectTypesId">
+							<option value="">Select User Type</option>
+
+
+							<th:block th:each="element : ${all_projectTypes}">
+								<option th:value="${element.id}">
+									<p th:utext="${element.projectType}"></p>
+								</option>
+							</th:block>
+
+					</select></td>
+				</tr>
+
+				<tr>
+					<td>Project Url</td>
+					<td><input type="text" id="projectUrl" name="projectUrl"
+						placeholder="Project Url"></td>
+				</tr>
+				<tr>
+					<td>Contract Url</td>
+					<td><input type="text" id="contractUrl" name="contractUrl"
+						placeholder="Contract Url"></td>
+				</tr>
+
+			</table>
+			<input type="submit" value="create new Project">
+		</form>
+	</div>
+	<hr>
+
+	<span th:utext="${message}"></span>
+
+	<hr>
+	<table>
+		<tr>
+			<th>Project Name</th>
+			<th>Project Type</th>
+			<th>Account Name</th>
+
+			<th>Channel Name</th>
+			<th>Project Url</th>
+			<th>Contract Url</th>
+			<th>User Name</th>
+			<th>Created Date</th>
+			<th></th>
+
+		</tr>
+		<!-- <tr th:each="all_users : ${all_users}">
+			<td th:utext="${all_users.userId}"></td>
+			<td th:utext="${all_users.userName}"></td>
+
+				<td th:text="${all_users.enabled} ? 'Active' : 'Disable'"></td>
+
+
+
+		</tr> -->
+
+	</table>
+
+</body>
+
+</html>

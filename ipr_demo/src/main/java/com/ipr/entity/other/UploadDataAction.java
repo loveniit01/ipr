@@ -1,5 +1,5 @@
 package com.ipr.entity.other;
-// Generated 28 Dec, 2018 2:44:56 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated 3 Jan, 2019 3:16:32 PM by Hibernate Tools 5.1.0.Alpha1
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;

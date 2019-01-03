@@ -1,5 +1,5 @@
 package com.ipr.entity.other;
-// Generated 28 Dec, 2018 2:44:56 PM by Hibernate Tools 5.1.0.Alpha1
+// Generated 3 Jan, 2019 3:16:32 PM by Hibernate Tools 5.1.0.Alpha1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -84,7 +84,10 @@ public class GreylistData implements java.io.Serializable {
 		this.domainName = domainName;
 	}
 
+
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "created_date", length = 19, nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	
 	public Date getCreatedDate() {
 		return this.createdDate;
 	}
